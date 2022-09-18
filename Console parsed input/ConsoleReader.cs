@@ -41,7 +41,6 @@
             }
         }
 
-
         /// <summary>
         /// ask user until it gets a string in the console
         /// </summary>
@@ -54,6 +53,27 @@
             while (string.IsNullOrEmpty(inp));
 
             return inp;
+        }
+
+        /// <summary>
+        /// ask user until it gets a string siutable for the conditions in the console
+        /// </summary>
+        /// <returns>returns given string</returns>
+        public static string ReadString(Predicate<string> condition)
+        {
+            string? inp;
+
+            while (true)
+            {
+                inp = Console.ReadLine();
+                if (!string.IsNullOrEmpty(inp))
+                {
+                    if (!condition.Invoke(inp))
+                        continue;
+
+                    return inp;
+                }
+            }
         }
     }
 }
